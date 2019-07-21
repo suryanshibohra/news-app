@@ -1,8 +1,36 @@
 <div class="content">
-    <div *ngFor="let article of articles">
-        <a routerLink="/article" [state]="article">{{ article.title }}</a>
+    <form class="news-form">
+        <mat-form-field class="news-search">
+            <input matInput placeholder="search" name="inputText" [(ngModel)]="inputText" #searchArticle
+                (keyup)='keyUpHandler($event)'>
+        </mat-form-field>
+    </form>
+    <div *ngIf="status==='loading'">
+        <mat-spinner></mat-spinner>
     </div>
-
+    <div class="noData" *ngIf="articles && articles.length===0">
+        No Articles found for {{inputText}}
+    </div>
+    <div *ngIf="status==='success' && (articles && articles.length>0)">
+        <mat-grid-list cols="3">
+            <mat-grid-tile *ngFor="let article of articles">
+                <mat-card class="news-card">
+                    <mat-card-header>
+                        <div mat-card-avatar class="news-header-image"></div>
+                        <mat-card-title><a routerLink="/article" [state]="article">{{ article.title }}</a>
+                        </mat-card-title>
+                        <mat-card-subtitle>{{article.source.name}}</mat-card-subtitle>
+                    </mat-card-header>
+                    <img mat-card-image src={{article.urlToImage}} alt="">
+                    <mat-card-content>
+                        <p>
+                            {{article.description}}
+                        </p>
+                    </mat-card-content>
+                </mat-card>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </div>
     <!-- Search mat input with debouncing and mat progress bar for loading -->
     <!-- List of fetched articles as snippets per the provided designs -->
     <!-- No results indication -->

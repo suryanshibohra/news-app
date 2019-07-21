@@ -1,0 +1,19 @@
+.content{
+    margin: auto;
+    width: 1024px;
+    &>.news-form {
+        min-width: 150px;
+        max-width: 500px;
+        &>.news-search {
+            width: 100%;
+            cursor: pointer;
+        }
+    }
+    & .news-card {
+        //max-width: 430px;
+        height: 300px;
+        margin: 5px;
+    }
+}
+  
+  

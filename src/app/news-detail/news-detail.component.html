@@ -1,6 +1,37 @@
-<div class="content">
+<div class="detail-container">
     <div *ngIf="(article$ | async) as article">
-        {{ article.title }} details
+        <mat-card class="details-card">
+            <img mat-card-image class="detail-img" src={{article.urlToImage}} alt="">
+            <div class="details">
+                <mat-card-header>
+                    <div mat-card-avatar class="news-header-image"></div>
+                    <mat-card-title>
+                        {{ article.title }}
+                    </mat-card-title>
+                    <mat-card-subtitle>{{article.source.name}}</mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                    <p>
+                        {{article.description}}
+                    </p>
+                </mat-card-content>
+                <mat-card-actions class="read-more" align="center">
+                    <a href="{{article.url}}" target="_balnk" mat-raised-button color="accent">Read More</a>
+                </mat-card-actions>
+            </div>
+        </mat-card>
+        <div class="comments-section">
+            <div class="user-comment" *ngFor="let comment of comments">
+                <div class="user-avatar">
+                    <img src={{comment.avatar}}>
+                </div>
+                <div class="comment-body">
+                    <div class="user-name">{{comment.name}}</div>
+                    <div class="date">{{comment.date |date}}</div>
+                    <p class="cb">{{comment.comment}}</p>
+                </div>
+            </div>
+        </div>
         <!-- Artile man image -->
         <!-- Artile title, description, metadata -->
         <!-- Read more button -->
